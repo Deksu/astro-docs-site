@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+import styles from '../../styles/Colors.module.css';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const tokensData = await reader.singletons.tokens.read();
+
+const brandColor = tokensData?.colors?.brand || '#000000';
+
+const colorSections = [
+  {
+    title: 'Brand Identity',
+    description: 'Our core brand color used for primary actions and branding elements.',
+    items: [
+      { name: 'Brand', token: '--color-primary', value: brandColor, desc: 'Primary brand color' },
+      { name: 'Brand Hover', token: '--color-primary-hover', value: '#2d2d2d', desc: 'Active state' },
+    ]
+  },
+  {
+    title: 'Neutral Surfaces',
+    description: 'Foundational shades used for layouts, backgrounds, and subtle elevations.',
+    items: [
+      { name: 'Background', token: '--color-bg', value: '#ffffff', desc: 'Main surface' },
+      { name: 'Subtle BG', token: '--color-bg-subtle', value: '#f7f7f8', desc: 'Contrast surface' },
+      { name: 'Border', token: '--color-border', value: '#e5e5e7', desc: 'Dividers & borders' }
+    ]
+  },
+  {
+     title: 'Typography',
+     description: 'Colors optimized for readability and hierarchical clarity.',
+     items: [
+       { name: 'Text Primary', token: '--color-text', value: '#000000', desc: 'Headings & body' },
+       { name: 'Text Subtle', token: '--color-text-subtle', value: '#6e6e73', desc: 'Captions & hints' }
+     ]
+  }
+];
+---
+
+<Layout title="Colors | Foundations">
+  <div class={styles.header}>
+    <h1>Colors</h1>
+    <p class={styles.subtitle}>Our brand color palette is designed for high contrast and modern aesthetics.</p>
+  </div>
+
+  {colorSections.map(section => (
+    <div class={styles.section}>
+      <h2>{section.title}</h2>
+      <p class={styles.groupDescription}>{section.description}</p>
+      
+      <div class={styles.grid}>
+        {section.items.map(item => (
+          <div class={styles.swatch}>
+            <div class={styles.preview} style={`background-color: ${item.value}`}></div>
+            <div class={styles.info}>
+              <h3 class={styles.name}>{item.name}</h3>
+              <div class={styles.token}><code>{item.token}</code></div>
+              <div class={styles.values}>
+                <div class={styles.label}>Value</div>
+                <div class={styles.valueText}>{item.value.toUpperCase()}</div>
+                <div class={styles.label}>Usage</div>
+                <div class={styles.valueText}>{item.desc}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</Layout>
+
+<style>
+  .group {
+    margin-bottom: var(--space-16);
+  }
+  .groupTitle {
+    font-size: var(--font-size-2xl);
+    margin-top: 0;
+  }
+  .groupDesc {
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-8);
+  }
+</style>

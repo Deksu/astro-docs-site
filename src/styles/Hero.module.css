@@ -1,0 +1,60 @@
+.hero {
+    padding-top: var(--space-12);
+}
+
+.title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-6);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-12);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+}
+
+.card {
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--transition-fast);
+    text-decoration: none;
+    color: inherit;
+}
+
+.card:hover {
+    border-color: var(--color-text-subtle);
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-lg);
+}
+
+.card p {
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-4);
+}
+
+.cardLink {
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}

@@ -1,0 +1,121 @@
+---
+interface Props {
+	title?: string;
+	headings?: { depth: number; text: string; slug: string }[];
+}
+
+const { title = "Design System Docs", headings = [] } = Astro.props;
+import '../styles/global.css';
+import styles from '../styles/Shell.module.css';
+
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const docs = await reader.collections.docs.all();
+
+// Group docs by section
+const sections = {
+	'getting-started': { label: 'Getting Started', items: [] as any[] },
+	'foundations': { 
+		label: 'Foundations', 
+		items: [
+			{ slug: 'colors', entry: { title: 'Colors' }, manual: true, href: '/foundations/colors' },
+			{ slug: 'typography', entry: { title: 'Typography' }, manual: true, href: '/foundations/typography' },
+		] as any[] 
+	},
+	'components': { label: 'Components', items: [] as any[] },
+};
+
+docs.forEach(doc => {
+	const section = doc.entry.section as keyof typeof sections;
+	if (sections[section]) {
+		// Avoid duplicates if we manually added it
+		if (!sections[section].items.some(i => i.slug === doc.slug)) {
+			sections[section].items.push(doc);
+		}
+	}
+});
+
+// Sort items within sections by order
+Object.values(sections).forEach(section => {
+	section.items.sort((a, b) => (a.entry.order || 0) - (b.entry.order || 0));
+});
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class={styles.shell}>
+			<header class={styles.header}>
+				<a href="/" class={styles.logo}>
+					<span>DS Docs</span>
+				</a>
+				<div class={styles.searchButton}>
+					<span>Search</span>
+					<span style="margin-left: auto; font-size: 10px; border: 1px solid var(--color-border); padding: 2px 4px; border-radius: 4px;">⌘K</span>
+				</div>
+                <div style="flex: 1;"></div>
+			</header>
+
+			<div class={styles.mainWrapper}>
+				<aside class={styles.sidebar}>
+					<nav>
+						{Object.entries(sections).map(([id, section]) => (
+							section.items.length > 0 && (
+								<>
+									<div class={styles.navSectionTitle}>{section.label}</div>
+									{section.items.map(item => {
+										const href = item.href || `/docs/${item.slug}`;
+										const isActive = currentPath === href || (currentPath === '/' && item.slug === 'welcome');
+										return (
+											<a 
+												href={href} 
+												class={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
+											>
+												{item.entry.title}
+											</a>
+										);
+									})}
+								</>
+							)
+						))}
+					</nav>
+				</aside>
+
+				<main class={styles.content}>
+					<slot />
+				</main>
+
+				<aside class={styles.toc}>
+					{headings.length > 0 && (
+						<>
+							<div class={styles.navSectionTitle}>On this page</div>
+							<nav>
+								{headings.map(heading => (
+									<a 
+										href={`#${heading.slug}`} 
+										class={styles.navItem}
+										style={`margin-left: ${(heading.depth - 1) * 1}rem;`}
+									>
+										{heading.text}
+									</a>
+								))}
+							</nav>
+						</>
+					)}
+				</aside>
+			</div>
+		</div>
+	</body>
+</html>

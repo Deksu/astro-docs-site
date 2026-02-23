@@ -1,0 +1,62 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+    outline: none;
+    text-decoration: none;
+    gap: var(--space-2);
+}
+
+.button:active,
+.button[data-pressed] {
+    transform: scale(0.98);
+}
+
+.button[data-focus-visible] {
+    box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}
+
+/* Primary Variant */
+.button[data-variant="primary"] {
+    background-color: var(--color-primary);
+    color: var(--color-primary-text);
+}
+
+.button[data-variant="primary"][data-hovered] {
+    background-color: var(--color-primary-hover);
+}
+
+/* Secondary Variant */
+.button[data-variant="secondary"] {
+    background-color: var(--color-bg);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.button[data-variant="secondary"][data-hovered] {
+    background-color: var(--color-bg-subtle);
+    border-color: var(--color-text-subtle);
+}
+
+/* States from React Aria */
+.button[data-focus-visible] {
+    box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+}
+
+.button[data-pressed] {
+    transform: translateY(1px);
+}
+
+.button[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}

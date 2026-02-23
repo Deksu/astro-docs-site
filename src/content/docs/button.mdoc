@@ -1,0 +1,29 @@
+---
+title: Button
+section: components
+order: 0
+---
+import { Button } from '../../components/ui/Button'
+
+# Button
+
+Buttons allow users to take actions, and make choices, with a single tap.
+
+## Examples
+
+### Primary
+
+<Button>Submit</Button>
+
+### Secondary
+
+<Button variant="secondary">Cancel</Button>
+
+## Accessibility
+
+Our button is built on top of [React Aria's Button](https://react-spectrum.adobe.com/react-aria/Button.html). It
+handles:
+
+- **Keyboard Support**: Space and Enter keys trigger the action.
+- **Focus Management**: Proper focus ring and state management.
+- **ARIA attributes**: Automatically handles `aria-disabled`, `aria-pressed`, etc.

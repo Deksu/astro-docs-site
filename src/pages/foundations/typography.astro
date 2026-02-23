@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import styles from '../../styles/Typography.module.css';
+
+const fontSizes = [
+  { label: 'Title 1', token: '--font-size-3xl', value: '2.25rem (36px)' },
+  { label: 'Title 2', token: '--font-size-2xl', value: '1.5rem (24px)' },
+  { label: 'Title 3', token: '--font-size-xl', value: '1.25rem (20px)' },
+  { label: 'Large', token: '--font-size-lg', value: '1.125rem (18px)' },
+  { label: 'Base', token: '--font-size-base', value: '0.9375rem (15px)' },
+  { label: 'Small', token: '--font-size-sm', value: '0.8125rem (13px)' },
+  { label: 'X-Small', token: '--font-size-xs', value: '0.75rem (12px)' },
+];
+
+const weights = [
+  { label: 'Bold', token: '--font-weight-bold', value: '700' },
+  { label: 'Semibold', token: '--font-weight-semibold', value: '600' },
+  { label: 'Medium', token: '--font-weight-medium', value: '500' },
+  { label: 'Normal', token: '--font-weight-normal', value: '400' },
+];
+---
+
+<Layout title="Typography - Foundations">
+  <div class={styles.pageHeader}>
+    <h1>Typography</h1>
+    <p class={styles.subtitle}>Our typography system is anchored by <strong>Inter</strong>, a versatile sans-serif crafted for readability, and <strong>SF Mono</strong> for technical data.</p>
+  </div>
+
+  <div class={styles.section}>
+    <h2>Typeface Identity</h2>
+    <div class={styles.familyGrid}>
+      <div class={styles.fontFamilyCard}>
+        <div class={styles.fontFamilyName}>Inter</div>
+        <div class={styles.fontFamilySpecimen}>
+          The future of intelligence is open. 1234567890
+        </div>
+        <div class={styles.details}>
+          <code>--font-sans</code> — Modern, clean, and highly legible across all screens.
+        </div>
+      </div>
+
+      <div class={styles.fontFamilyCard} style="font-family: var(--font-mono)">
+        <div class={styles.fontFamilyName}>SF Mono</div>
+        <div class={styles.fontFamilySpecimen}>
+          const model = "gpt-4o";
+        </div>
+        <div class={styles.details}>
+          <code>--font-mono</code> — Optimized for code, logs, and tabular data.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class={styles.section}>
+    <h2>Type Scale</h2>
+    <p class={styles.groupDesc}>A tiered scale designed for clear hierarchy and rhythmic spacing.</p>
+    <div class={styles.scale}>
+      {fontSizes.map((size) => (
+        <div class={styles.scaleItem}>
+          <div class={styles.label}>{size.label}</div>
+          <div>
+            <div class={styles.preview} style={`font-size: var(${size.token})`}>
+              Precise documentation for modern systems.
+            </div>
+            <div class={styles.details}>{size.token} — {size.value}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class={styles.section}>
+    <h2>Weights</h2>
+    <div class={styles.scale}>
+      {weights.map((weight) => (
+        <div class={styles.scaleItem}>
+          <div class={styles.label}>{weight.label}</div>
+          <div>
+            <div class={styles.preview} style={`font-weight: var(${weight.token}); font-size: var(--font-size-2xl)`}>
+              Emphasize what matters most.
+            </div>
+            <div class={styles.details}>{weight.token} — {weight.value}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .groupDesc {
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-8);
+    max-width: 600px;
+  }
+</style>

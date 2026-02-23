@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Button } from '../components/ui/Button';
+import HeroStyles from '../styles/Hero.module.css';
+---
+
+<Layout title="Design System Documentation">
+	<section class={HeroStyles.hero}>
+		<h1 class={HeroStyles.title}>Design System Documentation</h1>
+		<p class={HeroStyles.subtitle}>
+			Welcome to our official design system documentation. Here you'll find everything you need to build consistent, accessible, and high-quality user interfaces.
+		</p>
+		
+        <div style="display: flex; gap: var(--space-4);">
+            <a href="/docs/welcome"><Button>Get Started</Button></a>
+            <Button variant="secondary">Browse Components</Button>
+        </div>
+
+		<div class={HeroStyles.grid}>
+			<a href="/foundations/colors" class={HeroStyles.card}>
+				<h3>Foundations</h3>
+				<p>Colors, typography, spacing, and other core design tokens.</p>
+				<div class={HeroStyles.cardLink}>Learn more →</div>
+			</a>
+			<a href="/docs/button" class={HeroStyles.card}>
+				<h3>Components</h3>
+				<p>Interactive building blocks for web development.</p>
+				<div class={HeroStyles.cardLink}>Learn more →</div>
+			</a>
+			<a href="/docs/welcome" class={HeroStyles.card}>
+				<h3>Guidelines</h3>
+				<p>Best practices for accessibility, voice, and tone.</p>
+				<div class={HeroStyles.cardLink}>Learn more →</div>
+			</a>
+		</div>
+	</section>
+</Layout>
