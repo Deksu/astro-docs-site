@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TokenGroupCard from '../../components/tokens/TokenGroupCard.astro';
+import TokenBadge from '../../components/tokens/TokenBadge.astro';
+import styles from '../../styles/TokensOverview.module.css';
+import tokens from '../../data/tokens.json';
+
+const colorCount =
+  tokens.color.background.length +
+  tokens.color.border.length +
+  tokens.color.foreground.length;
+const typographyCount =
+  tokens.typography.families.length +
+  tokens.typography.sizes.length +
+  tokens.typography.weights.length;
+const headings = [
+  { depth: 2, text: 'Token groups', slug: 'token-groups' },
+  { depth: 2, text: 'How to use tokens', slug: 'how-to-use-tokens' },
+  { depth: 2, text: 'Naming conventions', slug: 'naming-conventions' }
+];
+---
+
+<Layout title="Tokens Overview | Design System Docs" headings={headings}>
+  <div class={styles.pageHeader}>
+    <h1>Design Tokens</h1>
+    <p class={styles.subtitle}>
+      Tokens are named values that power our UI. They keep the system consistent, readable,
+      and easy to evolve across products.
+    </p>
+  </div>
+
+  <section class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 id="token-groups" class={styles.sectionTitle}>Token groups</h2>
+    </div>
+    <div class={styles.groupGrid}>
+      <TokenGroupCard
+        title="Color"
+        description="Semantic roles for backgrounds, borders, and text."
+        count={colorCount}
+        href="/tokens/color"
+      />
+      <TokenGroupCard
+        title="Typography"
+        description="Font families, sizes, and weights."
+        count={typographyCount}
+        href="/tokens/typography"
+      />
+      <TokenGroupCard
+        title="Spacing"
+        description="Scale for layout, rhythm, and density."
+        count={12}
+        disabled
+      />
+      <TokenGroupCard
+        title="Radius"
+        description="Corner rounding for components and surfaces."
+        count={4}
+        disabled
+      />
+      <TokenGroupCard
+        title="Shadow"
+        description="Elevation and depth for layered UI."
+        count={3}
+        disabled
+      />
+    </div>
+  </section>
+
+  <section class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 id="how-to-use-tokens" class={styles.sectionTitle}>How to use tokens</h2>
+    </div>
+    <div class={styles.usageGrid}>
+      <div class={styles.codeBlock}>
+        <h3>CSS</h3>
+        <pre><code>{`.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}`}</code></pre>
+      </div>
+      <div class={styles.codeBlock}>
+        <h3>JS</h3>
+        <pre><code>{`const styles = {
+  backgroundColor: "var(--color-bg)",
+  color: "var(--color-text)"
+};`}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 id="naming-conventions" class={styles.sectionTitle}>Naming conventions</h2>
+    </div>
+    <div class={styles.noteCard}>
+      <p class={styles.noteText}>
+        Tokens are semantic, not visual. Prefer names that describe purpose over hex values.
+        Example: <strong>--color-text-subtle</strong> instead of <strong>--gray-500</strong>.
+      </p>
+      <div class={styles.tokenNameGrid}>
+        <TokenBadge label="--color-bg" />
+        <TokenBadge label="--color-border" />
+        <TokenBadge label="--color-text" />
+        <TokenBadge label="--font-size-base" />
+        <TokenBadge label="--font-weight-medium" />
+      </div>
+    </div>
+  </section>
+</Layout>

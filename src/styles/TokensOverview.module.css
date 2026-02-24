@@ -1,0 +1,76 @@
+.pageHeader {
+    margin-bottom: var(--space-12);
+}
+
+.subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-subtle);
+    max-width: 640px;
+}
+
+.section {
+    margin-bottom: var(--space-16);
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.sectionTitle {
+    margin: 0;
+}
+
+.groupGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-6);
+}
+
+.usageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
+}
+
+.codeBlock {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    background-color: var(--color-bg-subtle);
+}
+
+.codeBlock pre {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.tokenNameGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+}
+
+.noteCard {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    background-color: var(--color-bg);
+}
+
+.noteTitle {
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-base);
+}
+
+.noteText {
+    margin: 0;
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-sm);
+}

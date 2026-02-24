@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TokenSwatchCard from '../../components/tokens/TokenSwatchCard.astro';
+import styles from '../../styles/TokensColor.module.css';
+import tokens from '../../data/tokens.json';
+
+const backgroundTokens = tokens.color.background;
+const borderTokens = tokens.color.border;
+const foregroundTokens = tokens.color.foreground;
+const headings = [
+  { depth: 2, text: 'Semantic roles', slug: 'semantic-roles' },
+  { depth: 2, text: 'Background', slug: 'background' },
+  { depth: 2, text: 'Border', slug: 'border' },
+  { depth: 2, text: 'Foreground', slug: 'foreground' }
+];
+---
+
+<Layout title="Color Tokens | Design System Docs" headings={headings}>
+  <div class={styles.pageHeader}>
+    <h1>Color tokens</h1>
+    <p class={styles.subtitle}>
+      Colors are organized by role, not by palette. This keeps UI decisions consistent
+      across surfaces and makes themes easier to evolve.
+    </p>
+  </div>
+
+  <div class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 id="semantic-roles" class={styles.sectionTitle}>Semantic roles</h2>
+    </div>
+    <p class={styles.sectionDescription}>
+      Each category maps to a job in the interface. Backgrounds define surfaces, borders
+      separate structure, and foregrounds control readable content.
+    </p>
+    <p class={styles.sectionExample}>
+      Example: use <code>--color-bg</code> for surfaces, <code>--color-border</code> for dividers,
+      and <code>--color-text</code> for primary content.
+    </p>
+  </div>
+
+  <section id="background" class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 class={styles.sectionTitle}>Background</h2>
+      <p class={styles.sectionDescription}>Primary and secondary surfaces used across layouts.</p>
+    </div>
+    <div class={styles.swatchGrid}>
+      {backgroundTokens.map((token) => (
+        <TokenSwatchCard {...token} />
+      ))}
+    </div>
+  </section>
+
+  <section id="border" class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 class={styles.sectionTitle}>Border</h2>
+      <p class={styles.sectionDescription}>Subtle outlines and separators.</p>
+    </div>
+    <div class={styles.swatchGrid}>
+      {borderTokens.map((token) => (
+        <TokenSwatchCard {...token} />
+      ))}
+    </div>
+  </section>
+
+  <section id="foreground" class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 class={styles.sectionTitle}>Foreground</h2>
+      <p class={styles.sectionDescription}>Text and content colors optimized for readability.</p>
+    </div>
+    <div class={styles.swatchGrid}>
+      {foregroundTokens.map((token) => (
+        <TokenSwatchCard {...token} />
+      ))}
+    </div>
+  </section>
+</Layout>

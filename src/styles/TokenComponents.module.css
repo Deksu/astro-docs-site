@@ -1,0 +1,260 @@
+.tokenBadge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-subtle);
+}
+
+.groupCard {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    background-color: var(--color-bg);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.groupCardLink:hover {
+    border-color: var(--color-text-subtle);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.groupCardDisabled {
+    opacity: 0.55;
+    background-color: var(--color-bg-subtle);
+}
+
+.groupCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.groupCardTitle {
+    margin: 0;
+    font-size: var(--font-size-lg);
+}
+
+.groupCardCount {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 2px 8px;
+}
+
+.groupCardDescription {
+    margin: 0;
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-sm);
+}
+
+.swatchCard {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-bg);
+}
+
+.swatchPreview {
+    height: 140px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.swatchBody {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.swatchHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.swatchValueRow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.swatchName {
+    margin: 0;
+    font-size: var(--font-size-base);
+}
+
+.swatchValue {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-subtle);
+}
+
+.swatchMeta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    font-size: var(--font-size-xs);
+}
+
+.swatchToken {
+    font-family: var(--font-mono);
+    color: var(--color-text-subtle);
+}
+
+.swatchUsage {
+    color: var(--color-text);
+}
+
+.copyButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text-subtle);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.copyButton:hover {
+    border-color: var(--color-text-subtle);
+    color: var(--color-text);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.copyButton svg {
+    width: 14px;
+    height: 14px;
+}
+
+.copyTooltip {
+    position: absolute;
+    top: -34px;
+    right: 0;
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 4px 8px;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    pointer-events: none;
+}
+
+.copyButton:hover .copyTooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.copyButton[data-state="copied"] .copyTooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tableWrapper {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    background-color: var(--color-bg);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.table caption {
+    text-align: left;
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-subtle);
+}
+
+.table th,
+.table td {
+    padding: var(--space-3) var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.table th {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-subtle);
+    font-weight: var(--font-weight-semibold);
+    background-color: var(--color-bg-subtle);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.tableCaption {
+    padding: var(--space-4) var(--space-6);
+}
+
+.tableToken {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+}
+
+.copyButtonSmall {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text-subtle);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.copyButtonSmall:hover {
+    border-color: var(--color-text-subtle);
+    color: var(--color-text);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.copyButtonSmall svg {
+    width: 12px;
+    height: 12px;
+}
+
+.copyButtonSmall:hover .copyTooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.copyButtonSmall[data-state="copied"] .copyTooltip {
+    opacity: 1;
+    transform: translateY(0);
+}

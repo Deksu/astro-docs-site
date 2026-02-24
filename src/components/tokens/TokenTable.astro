@@ -1,0 +1,59 @@
+---
+interface Props {
+  head: string[];
+  rows: (string | number)[][];
+  caption?: string;
+  copyColumn?: number;
+}
+
+const { head, rows, caption, copyColumn } = Astro.props;
+import styles from '../../styles/TokenComponents.module.css';
+---
+
+<div class={styles.tableWrapper}>
+  <table class={styles.table}>
+    {caption && <caption class={styles.tableCaption}>{caption}</caption>}
+    <thead>
+      <tr>
+        {head.map((title) => (
+          <th scope="col">{title}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          {row.map((cell, idx) => (
+            <td>
+              {copyColumn === idx ? (
+                <span class={styles.tableToken}>
+                  <span>{cell}</span>
+                  <button
+                    class={styles.copyButtonSmall}
+                    type="button"
+                    aria-label={`Copy ${cell} to clipboard`}
+                    data-copy={String(cell)}
+                  >
+                    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                      <path
+                        fill="currentColor"
+                        d="M4 1.5A1.5 1.5 0 0 0 2.5 3v7A1.5 1.5 0 0 0 4 11.5h1V10H4V3h7v1.5h1.5V3A1.5 1.5 0 0 0 11 1.5H4Z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M6 5.5A1.5 1.5 0 0 1 7.5 4h5A1.5 1.5 0 0 1 14 5.5v7A1.5 1.5 0 0 1 12.5 14h-5A1.5 1.5 0 0 1 6 12.5v-7Z"
+                      />
+                    </svg>
+                    <span class={styles.copyTooltip} data-copy-tooltip>Copy to clipboard</span>
+                  </button>
+                </span>
+              ) : (
+                cell
+              )}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

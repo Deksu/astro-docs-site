@@ -1,0 +1,45 @@
+---
+interface Props {
+  name: string;
+  token: string;
+  value: string;
+  usage: string;
+}
+
+const { name, token, value, usage } = Astro.props;
+import styles from '../../styles/TokenComponents.module.css';
+---
+
+<div class={styles.swatchCard}>
+  <div class={styles.swatchPreview} style={`background: ${value}`}></div>
+  <div class={styles.swatchBody}>
+    <div class={styles.swatchHeader}>
+      <h3 class={styles.swatchName}>{name}</h3>
+      <div class={styles.swatchValueRow}>
+        <span class={styles.swatchValue}>{value.toUpperCase()}</span>
+        <button
+          class={styles.copyButton}
+          type="button"
+          aria-label={`Copy ${token} to clipboard`}
+          data-copy={token}
+        >
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path
+              fill="currentColor"
+              d="M4 1.5A1.5 1.5 0 0 0 2.5 3v7A1.5 1.5 0 0 0 4 11.5h1V10H4V3h7v1.5h1.5V3A1.5 1.5 0 0 0 11 1.5H4Z"
+            />
+            <path
+              fill="currentColor"
+              d="M6 5.5A1.5 1.5 0 0 1 7.5 4h5A1.5 1.5 0 0 1 14 5.5v7A1.5 1.5 0 0 1 12.5 14h-5A1.5 1.5 0 0 1 6 12.5v-7Z"
+            />
+          </svg>
+          <span class={styles.copyTooltip} data-copy-tooltip>Copy to clipboard</span>
+        </button>
+      </div>
+    </div>
+    <div class={styles.swatchMeta}>
+      <span class={styles.swatchToken}>{token}</span>
+      <span class={styles.swatchUsage}>{usage}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+import styles from '../../styles/TokenComponents.module.css';
+---
+
+<span class={styles.tokenBadge}>{label}</span>

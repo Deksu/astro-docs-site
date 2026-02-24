@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TokenTable from '../../components/tokens/TokenTable.astro';
+import styles from '../../styles/TokensTypography.module.css';
+import tokens from '../../data/tokens.json';
+
+const families = tokens.typography.families;
+const sizes = tokens.typography.sizes;
+const weights = tokens.typography.weights;
+const headings = [
+  { depth: 2, text: 'Font families', slug: 'font-families' },
+  { depth: 2, text: 'Font sizes', slug: 'font-sizes' },
+  { depth: 2, text: 'Font weights', slug: 'font-weights' }
+];
+---
+
+<Layout title="Typography Tokens | Design System Docs" headings={headings}>
+  <div class={styles.pageHeader}>
+    <h1>Typography tokens</h1>
+    <p class={styles.subtitle}>
+      Typography tokens define the voice of the system. They ensure readable interfaces and
+      consistent hierarchy across products.
+    </p>
+  </div>
+
+  <section class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 id="font-families" class={styles.sectionTitle}>Font families</h2>
+    </div>
+    <div class={styles.familyGrid}>
+      {families.map((family) => (
+        <div class={styles.familyCard}>
+          <h3 class={styles.familyTitle}>{family.name}</h3>
+          <div class={styles.familyToken}>{family.token}</div>
+          <div class={styles.familySample} style={`font-family: ${family.value}`}>
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 id="font-sizes" class={styles.sectionTitle}>Font sizes</h2>
+    </div>
+    <TokenTable
+      head={["Name", "Token", "Value", "Pixels"]}
+      rows={sizes.map((size) => [size.name, size.token, size.value, size.px || "—"])}
+      copyColumn={1}
+    />
+  </section>
+
+  <section class={styles.section}>
+    <div class={styles.sectionHeader}>
+      <h2 id="font-weights" class={styles.sectionTitle}>Font weights</h2>
+    </div>
+    <TokenTable
+      head={["Name", "Token", "Value"]}
+      rows={weights.map((weight) => [weight.name, weight.token, weight.value])}
+      copyColumn={1}
+    />
+  </section>
+</Layout>

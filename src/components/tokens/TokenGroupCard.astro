@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  count: number;
+  href?: string;
+  disabled?: boolean;
+}
+
+const { title, description, count, href, disabled = false } = Astro.props;
+import styles from '../../styles/TokenComponents.module.css';
+---
+
+{href && !disabled ? (
+  <a class={`${styles.groupCard} ${styles.groupCardLink}`} href={href}>
+    <div class={styles.groupCardHeader}>
+      <h3 class={styles.groupCardTitle}>{title}</h3>
+      <span class={styles.groupCardCount}>{count}</span>
+    </div>
+    <p class={styles.groupCardDescription}>{description}</p>
+  </a>
+) : (
+  <div class={`${styles.groupCard} ${disabled ? styles.groupCardDisabled : ''}`}>
+    <div class={styles.groupCardHeader}>
+      <h3 class={styles.groupCardTitle}>{title}</h3>
+      <span class={styles.groupCardCount}>{count}</span>
+    </div>
+    <p class={styles.groupCardDescription}>{description}</p>
+  </div>
+)}
