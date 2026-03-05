@@ -9,8 +9,12 @@ content:
     path: src/content/docs
     format: yaml-frontmatter
     subfolders: false
-    filename: '{primary}.mdoc'
+    filename: '{slug}.mdoc'
     fields:
+      - name: slug
+        label: Slug
+        type: string
+        required: true
       - name: title
         label: Title
         type: string
@@ -33,7 +37,8 @@ content:
         default: 0
       - name: body
         label: Body
-        type: rich-text
+        type: code
+        language: markdown
 
   - name: tokens
     label: Tokens
