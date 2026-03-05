@@ -19,12 +19,13 @@ content:
         label: Section
         type: select
         options:
-          - label: Getting Started
-            value: getting-started
-          - label: Foundations
-            value: foundations
-          - label: Components
-            value: components
+          values:
+            - label: Getting Started
+              value: getting-started
+            - label: Foundations
+              value: foundations
+            - label: Components
+              value: components
         required: true
       - name: order
         label: Order
