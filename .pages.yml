@@ -38,7 +38,8 @@ content:
       - name: body
         label: Body
         type: code
-        language: markdown
+        options:
+          language: markdown
 
   - name: tokens
     label: Tokens
