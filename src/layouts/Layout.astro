@@ -8,12 +8,10 @@ const { title = "Design System Docs", headings = [] } = Astro.props;
 import '../styles/global.css';
 import styles from '../styles/Shell.module.css';
 
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
 import { buildSearchIndex, normalizeSearchItems } from '../utils/searchIndex';
+import { getAllDocs } from '../utils/docs';
 
-const reader = createReader(process.cwd(), keystaticConfig);
-const docs = await reader.collections.docs.all();
+const docs = await getAllDocs();
 
 // Group docs by section
 const sections = {
@@ -37,7 +35,7 @@ const sections = {
 };
 
 docs.forEach(doc => {
-	const section = doc.entry.section as keyof typeof sections;
+	const section = doc.section as keyof typeof sections;
 	if (sections[section]) {
 		// Avoid duplicates if we manually added it
 		if (!sections[section].items.some(i => i.slug === doc.slug)) {
@@ -48,7 +46,7 @@ docs.forEach(doc => {
 
 // Sort items within sections by order
 Object.values(sections).forEach(section => {
-	section.items.sort((a, b) => (a.entry.order || 0) - (b.entry.order || 0));
+	section.items.sort((a, b) => (a.order || 0) - (b.order || 0));
 });
 
 const currentPath = Astro.url.pathname;
@@ -138,7 +136,7 @@ const searchItems = normalizeSearchItems(
 												href={href} 
 												class={`${styles.navItem} ${isActive ? styles.navItemActive : ''}`}
 											>
-												{item.entry.title}
+												{item.title}
 											</a>
 										);
 									})}

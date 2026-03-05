@@ -1,0 +1,161 @@
+media:
+  input: public/uploads
+  output: /uploads
+
+content:
+  - name: docs
+    label: Docs
+    type: collection
+    path: src/content/docs
+    format: yaml-frontmatter
+    subfolders: false
+    filename: '{primary}.mdoc'
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: section
+        label: Section
+        type: select
+        options:
+          - label: Getting Started
+            value: getting-started
+          - label: Foundations
+            value: foundations
+          - label: Components
+            value: components
+        required: true
+      - name: order
+        label: Order
+        type: number
+        default: 0
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: tokens
+    label: Tokens
+    type: file
+    path: src/data/tokens.json
+    format: json
+    fields:
+      - name: color
+        label: Color
+        fields:
+          - name: background
+            label: Background
+            list: true
+            fields:
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: token
+                label: Token
+                type: string
+                required: true
+              - name: value
+                label: Value
+                type: string
+                required: true
+              - name: usage
+                label: Usage
+                type: string
+          - name: border
+            label: Border
+            list: true
+            fields:
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: token
+                label: Token
+                type: string
+                required: true
+              - name: value
+                label: Value
+                type: string
+                required: true
+              - name: usage
+                label: Usage
+                type: string
+          - name: foreground
+            label: Foreground
+            list: true
+            fields:
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: token
+                label: Token
+                type: string
+                required: true
+              - name: value
+                label: Value
+                type: string
+                required: true
+              - name: usage
+                label: Usage
+                type: string
+
+      - name: typography
+        label: Typography
+        fields:
+          - name: families
+            label: Families
+            list: true
+            fields:
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: token
+                label: Token
+                type: string
+                required: true
+              - name: value
+                label: Value
+                type: string
+                required: true
+              - name: usage
+                label: Usage
+                type: string
+          - name: sizes
+            label: Sizes
+            list: true
+            fields:
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: token
+                label: Token
+                type: string
+                required: true
+              - name: value
+                label: Value
+                type: string
+                required: true
+              - name: px
+                label: PX
+                type: string
+                required: true
+          - name: weights
+            label: Weights
+            list: true
+            fields:
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: token
+                label: Token
+                type: string
+                required: true
+              - name: value
+                label: Value
+                type: string
+                required: true

@@ -1,12 +1,10 @@
 ---
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../../keystatic.config';
 import Layout from '../../layouts/Layout.astro';
-import { DocumentRenderer } from '@keystatic/core/renderer';
+import { marked } from 'marked';
+import { getAllDocs } from '../../utils/docs';
 
 export async function getStaticPaths() {
-  const reader = createReader(process.cwd(), keystaticConfig);
-  const docs = await reader.collections.docs.all();
+  const docs = await getAllDocs();
   return docs.map(doc => ({
     params: { slug: doc.slug },
     props: { doc },
@@ -14,73 +12,28 @@ export async function getStaticPaths() {
 }
 
 const { doc } = Astro.props;
-const { content, title } = doc.entry;
-const { node } = await content();
+const { body, title } = doc;
 
-// Helper to extract plain text from Markdoc nodes
-function extractText(n: any): string {
-  if (typeof n === 'string') return n;
-  if (n.attributes?.content !== undefined) return n.attributes.content;
-  if (n.children) return n.children.map(extractText).join('');
-  return '';
-}
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/[^\w]+/g, '-')
+    .replace(/(^-|-$)+/g, '');
 
-// Extract headings for TOC
-const headings = (node.children || [])
-  .filter(child => child.type === 'heading')
-  .map(heading => {
-    const text = extractText(heading);
-    return {
-      depth: heading.attributes.level || 1,
-      text,
-      slug: text.toLowerCase().replace(/[^\w]+/g, '-')
-    };
-  });
+const tokens = marked.lexer(body || '');
+const headings = tokens
+  .filter((token) => token.type === 'heading' && token.depth >= 2)
+  .map((token) => ({
+    depth: token.depth,
+    text: token.text,
+    slug: slugify(token.text)
+  }));
+
+const html = marked.parse(body || '');
 ---
 
 <Layout title={`${title} | Design System Docs`} headings={headings}>
-  <article class="prose">
-    <h1 id="top">{title}</h1>
-    
-    {node.children.map((child: any) => {
-      // Simple recursive renderer for Markdoc tags
-      function renderNode(n: any): any {
-        if (typeof n === 'string') return n;
-        if (n.type === 'text') return n.attributes.content;
-        
-        const children = n.children?.map(renderNode) || [];
-        
-        switch (n.type) {
-          case 'heading':
-            const HeadTag = `h${n.attributes.level}`;
-            const slug = extractText(n).toLowerCase().replace(/[^\w]+/g, '-');
-            return <HeadTag id={slug}>{children}</HeadTag>;
-          case 'paragraph':
-            return <p>{children}</p>;
-          case 'list':
-            const ListTag = n.attributes.ordered ? 'ol' : 'ul';
-            return <ListTag>{children}</ListTag>;
-          case 'item':
-            return <li>{children}</li>;
-          case 'blockquote':
-            return <blockquote>{children}</blockquote>;
-          case 'code':
-            return n.attributes.inline ? <code>{n.attributes.content}</code> : <pre><code>{n.attributes.content}</code></pre>;
-          case 'link':
-            return <a href={n.attributes.href}>{children}</a>;
-          case 'strong':
-            return <strong>{children}</strong>;
-          case 'em':
-            return <em>{children}</em>;
-          case 'hr':
-            return <hr />;
-          default:
-            return <div>{children}</div>;
-        }
-      }
-      return renderNode(child);
-    })}
-  </article>
+  <article class="prose" set:html={html} />
 </Layout>
 
 <style is:global>

@@ -6,7 +6,7 @@ This project is a high-performance, accessible documentation site for our compan
 - **Framework**: Astro
 - **UI Logic**: React Aria Components (Headless)
 - **Styling**: CSS Modules
-- **CMS**: Keystatic Cloud
+- **CMS**: Pages CMS
 
 ## Next Steps
 
@@ -22,8 +22,8 @@ This project is a high-performance, accessible documentation site for our compan
 - Create atomic components (Button, Link, Input) using React Aria Primitives.
 - Ensure 100% accessibility compliance.
 
-### 4. Admin UI (Keystatic)
-- Install and configure Keystatic.
+### 4. Admin UI (Pages CMS)
+- Install and configure Pages CMS.
 - Connect to GitHub for the "Designer-to-PR" workflow.
 
 ## Commands

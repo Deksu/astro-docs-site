@@ -2,9 +2,17 @@
   /* Colors - OpenAI "Noir" Documentation Palette */
   --color-bg: #ffffff;
   --color-bg-subtle: #f7f7f8;
+  --color-bg-elevated: #ffffff;
+  --color-bg-inset: #f0f0f2;
   --color-text: #000000;
   --color-text-subtle: #6e6e73;
+  --color-text-muted: #8e8e93;
+  --color-link: #000000;
+  --color-link-hover: #2d2d2d;
   --color-border: #e5e5e7;
+  --color-border-subtle: #ededf0;
+  --color-border-strong: #c8c8cc;
+  --color-focus: #0a84ff;
 
   /* Primary Action Colors (Mono) */
   --color-primary: #000000;
@@ -32,19 +40,32 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
+  --line-height-tight: 1.15;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+
   /* Spacing */
+  --space-0: 0;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
   --space-24: 6rem;
+  --space-28: 7rem;
   --space-32: 8rem;
-  --space-24: 6rem;
-  --space-32: 8rem;
+  --space-40: 10rem;
+  --space-48: 12rem;
+  --space-64: 16rem;
 
   /* Radii */
   --radius-sm: 0.25rem;
@@ -60,6 +81,16 @@
   --content-max-width: 900px;
   --header-height: 64px;
 
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.16);
+
+  /* Z-index */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-overlay: 100;
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
@@ -69,9 +100,17 @@
 [data-theme='dark'] {
   --color-bg: #000000;
   --color-bg-subtle: #1a1a1c;
+  --color-bg-elevated: #111113;
+  --color-bg-inset: #0b0b0d;
   --color-text: #ffffff;
   --color-text-subtle: #86868b;
+  --color-text-muted: #9c9ca1;
+  --color-link: #ffffff;
+  --color-link-hover: #e5e5e7;
   --color-border: #2d2d2e;
+  --color-border-subtle: #222224;
+  --color-border-strong: #3d3d40;
+  --color-focus: #64d2ff;
 
   --color-primary: #ffffff;
   --color-primary-hover: #e5e5e7;

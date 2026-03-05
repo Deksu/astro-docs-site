@@ -7,10 +7,8 @@ export type SearchItem = {
 
 type DocEntry = {
   slug: string;
-  entry: {
-    title: string;
-    section: string;
-  };
+  title: string;
+  section: string;
 };
 
 export function buildSearchIndex(
@@ -18,10 +16,10 @@ export function buildSearchIndex(
   sections: Record<string, { label: string }>
 ): SearchItem[] {
   return docs.map((doc) => ({
-    title: doc.entry.title,
+    title: doc.title,
     href: `/docs/${doc.slug}`,
-    section: doc.entry.section,
-    sectionLabel: sections[doc.entry.section]?.label || doc.entry.section
+    section: doc.section,
+    sectionLabel: sections[doc.section]?.label || doc.section
   }));
 }
 

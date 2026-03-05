@@ -7,11 +7,11 @@ Build a high‑performance, accessible documentation site for our design system,
 - **Framework:** Astro
 - **UI Logic:** React Aria Components (headless)
 - **Styling:** CSS Modules + `src/styles/tokens.css`
-- **Content:** Keystatic (Markdoc) in `src/content/docs`
+- **Content:** Pages CMS (Markdown) in `src/content/docs`
 
 **Layout structure**
 - `src/layouts/Layout.astro` defines the 3‑column shell (header, sidebar nav, content, TOC).
-- Pages live under `src/pages` with content sourced from Keystatic.
+- Pages live under `src/pages` with content sourced from Pages CMS-managed files.
 - Tokens pages are standalone Astro pages with JSON‑backed data.
 
 ## Key UI/UX Decisions (Today’s Work)
@@ -34,9 +34,9 @@ Build a high‑performance, accessible documentation site for our design system,
 - `src/data/tokens.json` drives token overview pages.
 
 ## Navigation & IA
-- **Getting Started** (Keystatic docs)
+- **Getting Started** (Pages CMS docs)
 - **Foundations** (Colors, Typography)
-- **Components** (Keystatic docs)
+- **Components** (Pages CMS docs)
 - **Tokens** (Overview, Color, Typography)
 
 ## Tests
