@@ -15,13 +15,13 @@ npm run dev
 2. Set the environment variable in `.env`:
 
 ```env
-KEYSTATIC_CLOUD_PROJECT=bravado/astro-docs-site
+PUBLIC_KEYSTATIC_CLOUD_PROJECT=bravado/astro-docs-site
 ```
 
 Optional branch prefix:
 
 ```env
-KEYSTATIC_BRANCH_PREFIX=keystatic
+PUBLIC_KEYSTATIC_BRANCH_PREFIX=keystatic
 ```
 
 3. Start the dev server and open the admin UI at:
@@ -38,6 +38,8 @@ This repo is configured for GitHub Pages project hosting:
 - `base`: `/astro-docs-site`
 
 These values are set in `astro.config.mjs`.
+
+Keystatic Cloud requires `PUBLIC_KEYSTATIC_CLOUD_PROJECT` at build time so the admin UI can load. The GitHub Pages workflow sets it automatically for production builds.
 
 ## Commands
 

@@ -9,6 +9,7 @@ Build a high‑performance, accessible documentation site for our design system,
 - **Styling:** CSS Modules + `src/styles/tokens.css`
 - **Content:** Keystatic (Markdoc) in `src/content/docs`
   - Note: We briefly tried Pages CMS, but it felt too buggy and limited for our needs, so we reverted back to Keystatic. We may evaluate Keystatic Cloud later.
+  - Keystatic Cloud is the intended path for GitHub‑backed edits (Designer‑to‑PR workflow).
 
 **Layout structure**
 - `src/layouts/Layout.astro` defines the 3‑column shell (header, sidebar nav, content, TOC).
@@ -49,4 +50,5 @@ Build a high‑performance, accessible documentation site for our design system,
 - Keyboard navigation in search results.
 - Extend token coverage (spacing, radius, shadow).
 - Consider theme/dark‑mode support when needed.
- - Connect Keystatic admin to GitHub (Designer‑to‑PR workflow). Evaluate Keystatic Cloud for this.
+ - Connect Keystatic admin to GitHub (Designer‑to‑PR workflow) via Keystatic Cloud.
+ - Ensure GitHub Pages build uses `PUBLIC_KEYSTATIC_CLOUD_PROJECT`.

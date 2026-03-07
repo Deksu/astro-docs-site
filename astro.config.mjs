@@ -5,9 +5,15 @@ import react from '@astrojs/react';
 
 import keystatic from '@keystatic/astro';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://deksu.github.io',
-  base: '/astro-docs-site',
-  integrations: [react(), keystatic()]
+  ...(isProd
+    ? {
+        site: 'https://deksu.github.io',
+        base: '/astro-docs-site',
+      }
+    : {}),
+  integrations: [react(), keystatic()],
 });

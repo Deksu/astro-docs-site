@@ -1,7 +1,11 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-const cloudProject = process.env.KEYSTATIC_CLOUD_PROJECT;
-const branchPrefix = process.env.KEYSTATIC_BRANCH_PREFIX;
+const cloudProject =
+  import.meta.env.PUBLIC_KEYSTATIC_CLOUD_PROJECT ||
+  (typeof process !== 'undefined' ? process.env.KEYSTATIC_CLOUD_PROJECT : undefined);
+const branchPrefix =
+  import.meta.env.PUBLIC_KEYSTATIC_BRANCH_PREFIX ||
+  (typeof process !== 'undefined' ? process.env.KEYSTATIC_BRANCH_PREFIX : undefined);
 
 const storage = cloudProject
   ? {
@@ -41,6 +45,7 @@ export default config({
         tokens: singleton({
             label: 'Design Tokens',
             path: 'src/data/tokens',
+            format: { data: 'json' },
             schema: {
                 color: fields.object(
                     {
@@ -51,7 +56,10 @@ export default config({
                                 value: fields.text({ label: 'Value' }),
                                 usage: fields.text({ label: 'Usage' }),
                             }),
-                            { label: 'Background' }
+                            {
+                                label: 'Background',
+                                itemLabel: (props) => props.fields.name.value || 'Background token',
+                            }
                         ),
                         border: fields.array(
                             fields.object({
@@ -60,7 +68,10 @@ export default config({
                                 value: fields.text({ label: 'Value' }),
                                 usage: fields.text({ label: 'Usage' }),
                             }),
-                            { label: 'Border' }
+                            {
+                                label: 'Border',
+                                itemLabel: (props) => props.fields.name.value || 'Border token',
+                            }
                         ),
                         foreground: fields.array(
                             fields.object({
@@ -69,7 +80,10 @@ export default config({
                                 value: fields.text({ label: 'Value' }),
                                 usage: fields.text({ label: 'Usage' }),
                             }),
-                            { label: 'Foreground' }
+                            {
+                                label: 'Foreground',
+                                itemLabel: (props) => props.fields.name.value || 'Foreground token',
+                            }
                         ),
                     },
                     { label: 'Color' }
@@ -83,7 +97,10 @@ export default config({
                                 value: fields.text({ label: 'Value' }),
                                 usage: fields.text({ label: 'Usage' }),
                             }),
-                            { label: 'Families' }
+                            {
+                                label: 'Families',
+                                itemLabel: (props) => props.fields.name.value || 'Family',
+                            }
                         ),
                         sizes: fields.array(
                             fields.object({
@@ -92,7 +109,10 @@ export default config({
                                 value: fields.text({ label: 'Value' }),
                                 px: fields.text({ label: 'PX' }),
                             }),
-                            { label: 'Sizes' }
+                            {
+                                label: 'Sizes',
+                                itemLabel: (props) => props.fields.name.value || 'Size',
+                            }
                         ),
                         weights: fields.array(
                             fields.object({
@@ -100,7 +120,10 @@ export default config({
                                 token: fields.text({ label: 'Token' }),
                                 value: fields.text({ label: 'Value' }),
                             }),
-                            { label: 'Weights' }
+                            {
+                                label: 'Weights',
+                                itemLabel: (props) => props.fields.name.value || 'Weight',
+                            }
                         ),
                     },
                     { label: 'Typography' }

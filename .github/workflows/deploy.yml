@@ -14,6 +14,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_KEYSTATIC_CLOUD_PROJECT: bravado/astro-docs-site
     steps:
       - name: Checkout
         uses: actions/checkout@v4
