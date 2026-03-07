@@ -2,6 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import { Button } from '../components/ui/Button';
 import HeroStyles from '../styles/Hero.module.css';
+
+const base = import.meta.env.BASE_URL || '/';
+const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+const withBase = (path: string) => (path.startsWith('/') ? `${basePath}${path}` || '/' : path);
 ---
 
 <Layout title="Design System Documentation">
@@ -12,22 +16,22 @@ import HeroStyles from '../styles/Hero.module.css';
 		</p>
 		
         <div style="display: flex; gap: var(--space-4);">
-            <a href="/docs/welcome"><Button>Get Started</Button></a>
+            <a href={withBase('/docs/welcome')}><Button>Get Started</Button></a>
             <Button variant="secondary">Browse Components</Button>
         </div>
 
 		<div class={HeroStyles.grid}>
-			<a href="/foundations/colors" class={HeroStyles.card}>
+			<a href={withBase('/foundations/colors')} class={HeroStyles.card}>
 				<h3>Foundations</h3>
 				<p>Colors, typography, spacing, and other core design tokens.</p>
 				<div class={HeroStyles.cardLink}>Learn more →</div>
 			</a>
-			<a href="/docs/button" class={HeroStyles.card}>
+			<a href={withBase('/docs/button')} class={HeroStyles.card}>
 				<h3>Components</h3>
 				<p>Interactive building blocks for web development.</p>
 				<div class={HeroStyles.cardLink}>Learn more →</div>
 			</a>
-			<a href="/docs/welcome" class={HeroStyles.card}>
+			<a href={withBase('/docs/welcome')} class={HeroStyles.card}>
 				<h3>Guidelines</h3>
 				<p>Best practices for accessibility, voice, and tone.</p>
 				<div class={HeroStyles.cardLink}>Learn more →</div>

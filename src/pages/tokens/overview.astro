@@ -5,6 +5,10 @@ import TokenBadge from '../../components/tokens/TokenBadge.astro';
 import styles from '../../styles/TokensOverview.module.css';
 import tokens from '../../data/tokens.json';
 
+const base = import.meta.env.BASE_URL || '/';
+const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+const withBase = (path: string) => (path.startsWith('/') ? `${basePath}${path}` || '/' : path);
+
 const colorCount =
   tokens.color.background.length +
   tokens.color.border.length +
@@ -38,13 +42,13 @@ const headings = [
         title="Color"
         description="Semantic roles for backgrounds, borders, and text."
         count={colorCount}
-        href="/tokens/color"
+        href={withBase('/tokens/color')}
       />
       <TokenGroupCard
         title="Typography"
         description="Font families, sizes, and weights."
         count={typographyCount}
-        href="/tokens/typography"
+        href={withBase('/tokens/typography')}
       />
       <TokenGroupCard
         title="Spacing"
