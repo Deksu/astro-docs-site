@@ -1,9 +1,18 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
+const cloudProject = process.env.KEYSTATIC_CLOUD_PROJECT;
+const branchPrefix = process.env.KEYSTATIC_BRANCH_PREFIX;
+
+const storage = cloudProject
+  ? {
+      kind: 'cloud' as const,
+      ...(branchPrefix ? { branchPrefix } : {}),
+    }
+  : { kind: 'local' as const };
+
 export default config({
-    storage: {
-        kind: 'local',
-    },
+    storage,
+    ...(cloudProject ? { cloud: { project: cloudProject } } : {}),
     collections: {
         docs: collection({
             label: 'Documentation',
@@ -33,13 +42,68 @@ export default config({
             label: 'Design Tokens',
             path: 'src/data/tokens',
             schema: {
-                colors: fields.object(
+                color: fields.object(
                     {
-                        brand: fields.text({ label: 'Brand Color', defaultValue: '#000000' }),
-                        text: fields.text({ label: 'Text Color', defaultValue: '#000000' }),
-                        background: fields.text({ label: 'Background Color', defaultValue: '#ffffff' }),
+                        background: fields.array(
+                            fields.object({
+                                name: fields.text({ label: 'Name' }),
+                                token: fields.text({ label: 'Token' }),
+                                value: fields.text({ label: 'Value' }),
+                                usage: fields.text({ label: 'Usage' }),
+                            }),
+                            { label: 'Background' }
+                        ),
+                        border: fields.array(
+                            fields.object({
+                                name: fields.text({ label: 'Name' }),
+                                token: fields.text({ label: 'Token' }),
+                                value: fields.text({ label: 'Value' }),
+                                usage: fields.text({ label: 'Usage' }),
+                            }),
+                            { label: 'Border' }
+                        ),
+                        foreground: fields.array(
+                            fields.object({
+                                name: fields.text({ label: 'Name' }),
+                                token: fields.text({ label: 'Token' }),
+                                value: fields.text({ label: 'Value' }),
+                                usage: fields.text({ label: 'Usage' }),
+                            }),
+                            { label: 'Foreground' }
+                        ),
                     },
-                    { label: 'Colors' }
+                    { label: 'Color' }
+                ),
+                typography: fields.object(
+                    {
+                        families: fields.array(
+                            fields.object({
+                                name: fields.text({ label: 'Name' }),
+                                token: fields.text({ label: 'Token' }),
+                                value: fields.text({ label: 'Value' }),
+                                usage: fields.text({ label: 'Usage' }),
+                            }),
+                            { label: 'Families' }
+                        ),
+                        sizes: fields.array(
+                            fields.object({
+                                name: fields.text({ label: 'Name' }),
+                                token: fields.text({ label: 'Token' }),
+                                value: fields.text({ label: 'Value' }),
+                                px: fields.text({ label: 'PX' }),
+                            }),
+                            { label: 'Sizes' }
+                        ),
+                        weights: fields.array(
+                            fields.object({
+                                name: fields.text({ label: 'Name' }),
+                                token: fields.text({ label: 'Token' }),
+                                value: fields.text({ label: 'Value' }),
+                            }),
+                            { label: 'Weights' }
+                        ),
+                    },
+                    { label: 'Typography' }
                 ),
             },
         }),

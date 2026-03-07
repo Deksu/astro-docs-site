@@ -3,37 +3,51 @@ import Layout from '../../layouts/Layout.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
 import styles from '../../styles/Colors.module.css';
+import fallbackTokens from '../../data/tokens.json';
 
 const reader = createReader(process.cwd(), keystaticConfig);
-const tokensData = await reader.singletons.tokens.read();
+let tokensData = null;
+try {
+  tokensData = await reader.singletons.tokens.read();
+} catch (error) {
+  tokensData = null;
+}
 
-const brandColor = tokensData?.colors?.brand || '#000000';
+const tokens = tokensData || fallbackTokens;
+const backgroundTokens = tokens?.color?.background ?? [];
+const borderTokens = tokens?.color?.border ?? [];
+const foregroundTokens = tokens?.color?.foreground ?? [];
 
 const colorSections = [
   {
-    title: 'Brand Identity',
-    description: 'Our core brand color used for primary actions and branding elements.',
-    items: [
-      { name: 'Brand', token: '--color-primary', value: brandColor, desc: 'Primary brand color' },
-      { name: 'Brand Hover', token: '--color-primary-hover', value: '#2d2d2d', desc: 'Active state' },
-    ]
+    title: 'Backgrounds',
+    description: 'Foundational surfaces used across layouts and cards.',
+    items: backgroundTokens.map((token) => ({
+      name: token.name,
+      token: token.token,
+      value: token.value,
+      desc: token.usage
+    }))
   },
   {
-    title: 'Neutral Surfaces',
-    description: 'Foundational shades used for layouts, backgrounds, and subtle elevations.',
-    items: [
-      { name: 'Background', token: '--color-bg', value: '#ffffff', desc: 'Main surface' },
-      { name: 'Subtle BG', token: '--color-bg-subtle', value: '#f7f7f8', desc: 'Contrast surface' },
-      { name: 'Border', token: '--color-border', value: '#e5e5e7', desc: 'Dividers & borders' }
-    ]
+    title: 'Borders',
+    description: 'Dividers and outlines that separate structure and hierarchy.',
+    items: borderTokens.map((token) => ({
+      name: token.name,
+      token: token.token,
+      value: token.value,
+      desc: token.usage
+    }))
   },
   {
-     title: 'Typography',
-     description: 'Colors optimized for readability and hierarchical clarity.',
-     items: [
-       { name: 'Text Primary', token: '--color-text', value: '#000000', desc: 'Headings & body' },
-       { name: 'Text Subtle', token: '--color-text-subtle', value: '#6e6e73', desc: 'Captions & hints' }
-     ]
+     title: 'Foreground',
+     description: 'Text, links, and interactive emphasis colors.',
+     items: foregroundTokens.map((token) => ({
+       name: token.name,
+       token: token.token,
+       value: token.value,
+       desc: token.usage
+     }))
   }
 ];
 ---
