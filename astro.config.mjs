@@ -15,5 +15,5 @@ export default defineConfig({
         base: '/astro-docs-site',
       }
     : {}),
-  integrations: [react(), keystatic()],
+  integrations: [react(), ...(isProd ? [] : [keystatic()])],
 });

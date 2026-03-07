@@ -30,6 +30,8 @@ PUBLIC_KEYSTATIC_BRANCH_PREFIX=keystatic
 http://localhost:4321/keystatic
 ```
 
+Note: Keystatic’s local admin routes are only enabled in development. GitHub Pages builds are fully static, so use Keystatic Cloud’s hosted editor for production content updates.
+
 ## GitHub Pages Deploy
 
 This repo is configured for GitHub Pages project hosting:
