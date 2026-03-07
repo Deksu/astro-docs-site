@@ -7,5 +7,7 @@ import keystatic from '@keystatic/astro';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://deksu.github.io',
+  base: '/astro-docs-site',
   integrations: [react(), keystatic()]
 });

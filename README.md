@@ -1,46 +1,49 @@
-# Astro Starter Kit: Basics
+# Astro Design System Docs
+
+High‑performance documentation site for our design system, built with Astro and Keystatic.
+
+## Quick Start
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Keystatic Cloud Setup
 
-## 🚀 Project Structure
+1. Create a Keystatic Cloud project.
+2. Set the environment variable in `.env`:
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```env
+KEYSTATIC_CLOUD_PROJECT=bravado/astro-docs-site
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Optional branch prefix:
 
-## 🧞 Commands
+```env
+KEYSTATIC_BRANCH_PREFIX=keystatic
+```
 
-All commands are run from the root of the project, from a terminal:
+3. Start the dev server and open the admin UI at:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```
+http://localhost:4321/keystatic
+```
 
-## 👀 Want to learn more?
+## GitHub Pages Deploy
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This repo is configured for GitHub Pages project hosting:
+
+- `site`: `https://deksu.github.io`
+- `base`: `/astro-docs-site`
+
+These values are set in `astro.config.mjs`.
+
+## Commands
+
+| Command         | Action                              |
+| :-------------- | :---------------------------------- |
+| `npm install`   | Install dependencies                |
+| `npm run dev`   | Start dev server at `localhost:4321`|
+| `npm run build` | Build production site to `./dist/`  |
+| `npm run preview` | Preview the build locally         |
