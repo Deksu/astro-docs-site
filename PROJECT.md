@@ -10,6 +10,7 @@ Build a high‑performance, accessible documentation site for our design system,
 - **Content:** Keystatic (Markdoc) in `src/content/docs`
   - Note: We briefly tried Pages CMS, but it felt too buggy and limited for our needs, so we reverted back to Keystatic. We may evaluate Keystatic Cloud later.
   - Keystatic Cloud is the intended path for GitHub‑backed edits (Designer‑to‑PR workflow).
+- **Static hosting option:** Static.app works for Astro static output if we upload only `dist/`. This is worth considering in other static-site projects where simple file hosting is enough and we do not need the host to replace the CMS/build workflow.
 
 **Layout structure**
 - `src/layouts/Layout.astro` defines the 3‑column shell (header, sidebar nav, content, TOC).
